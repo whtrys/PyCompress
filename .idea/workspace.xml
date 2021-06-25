@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4befee52-dec1-4935-8467-a547409efbbc" name="默认变更列表" comment="">
-      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/ico.ico" beforeDir="false" afterPath="$PROJECT_DIR$/img/ico.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trans/zh_CN.json" beforeDir="false" afterPath="$PROJECT_DIR$/trans/zh_CN.json" afterDir="false" />
-    </list>
+    <list default="true" id="4befee52-dec1-4935-8467-a547409efbbc" name="默认变更列表" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +41,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Python.主程序">
     <configuration name="主程序" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -117,11 +113,20 @@
       <option name="project" value="LOCAL" />
       <updated>1624613187212</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="支持拖拽">
+      <created>1624615101892</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1624615101892</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="支持拖拽" />
+    <option name="LAST_COMMIT_MESSAGE" value="支持拖拽" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

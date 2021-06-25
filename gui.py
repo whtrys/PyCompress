@@ -88,9 +88,10 @@ def decided(bt, filepath):
     if filepath == "None":
         filepath = tkfd.askopenfilename(filetypes=support_file)
 
-    file_name_sp = filepath.split('/')
+    file_name_sp = filepath.split('\\')
     file_name_sp = file_name_sp[-1]
     choice = file_name_sp.split('.')
+    print(choice)
     file_path_name = choice[0]
     choice = choice[-1]
     compress_item = choice
@@ -106,7 +107,7 @@ def decided(bt, filepath):
 
 def save_compress():
     if compress_item == 'zip':
-        zip_cw.save_zip(save_zip_bt, compress_files, file_path_name)
+        zip_cw.save_zip(save_compress_bt, compress_files, file_path_name)
     tkms.showinfo(language['tip'], "已解压")
 
 
@@ -126,12 +127,10 @@ def dnd(file):
     else:
         for i in file_list:
             if not os.path.isfile(i):
-                print("dnd-1")
                 become_compress(i.replace('\\','/'))
             elif i.split(".")[-1] not in support_file_pure:
                 tkms.showerror(language["error"], language["Error!We don't support these formats!"])
             else:
-                print("dnd-3")
                 decided(save_compress_bt,i)
 
 

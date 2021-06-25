@@ -82,7 +82,6 @@ def save_zip(save_zip_bt, zip_files, just_file_name):
             for file in zip_files.namelist():
                 zip_files.extract(file, save_dir)
             recode(save_dir)
-            tkms.showinfo("提示", "解压成功")
 
 
 def become_compress(become_compress_dir):

@@ -14,7 +14,8 @@ import music
 import zip_cw
 import sys
 import json
-import windnd
+from windnd import hook_dropfiles
+import rar_cw
 
 with open('setting.json', 'r', encoding='utf-8') as f:
     setting = json.load(f)
@@ -68,7 +69,7 @@ def restart_program():
     os.execl(python, python, *sys.argv)
 
 
-def decided(bt, file_name):
+def decided(bt, filepath):
     """
     打开并判断打开的文件类型
     :param bt: 保存按键
@@ -78,15 +79,16 @@ def decided(bt, file_name):
     global file_path_name
     global compress_item
 
+    print("decided")
     # 重启程序以清空缓存的文件
     if compress_item != '':
         restart_program()
 
     file_list.delete(0, tk.END)
-    if file_name == "None":
-        file_name = tkfd.askopenfilename(filetypes=support_file)
+    if filepath == "None":
+        filepath = tkfd.askopenfilename(filetypes=support_file)
 
-    file_name_sp = file_name.split('/')
+    file_name_sp = filepath.split('/')
     file_name_sp = file_name_sp[-1]
     choice = file_name_sp.split('.')
     file_path_name = choice[0]
@@ -97,19 +99,22 @@ def decided(bt, file_name):
         pass
     elif choice == 'zip':
         bt['state'] = 'normal'
-        compress_files = zip_cw.get_zip(file_name, file_list)
-
+        compress_files = zip_cw.get_zip(filepath, file_list)
+    elif choice == 'rar':
+        bt['state'] = 'normal'
+        compress_files = rar_cw.get_rar(filepath)
 
 def save_compress():
     if compress_item == 'zip':
         zip_cw.save_zip(save_zip_bt, compress_files, file_path_name)
-        tkms.showinfo(language['tip'], "已解压")
+    tkms.showinfo(language['tip'], "已解压")
 
 
-def become_compress():
+def become_compress(file=None):
     if b_compress_item == 'zip':
-        zip_cw.become_compress()
+        zip_cw.become_compress(file)
     elif b_compress_item == 'rar':
+        # rar_cw.become_compress(file)
         pass
 
 
@@ -120,10 +125,14 @@ def dnd(file):
         tkms.showerror(language["error"], "请一次性拖拽一个文件")
     else:
         for i in file_list:
-            if i.split(".")[-1] not in support_file_pure:
+            if not os.path.isfile(i):
+                print("dnd-1")
+                become_compress(i.replace('\\','/'))
+            elif i.split(".")[-1] not in support_file_pure:
                 tkms.showerror(language["error"], language["Error!We don't support these formats!"])
             else:
-                decided(save_zip_bt,i)
+                print("dnd-3")
+                decided(save_compress_bt,i)
 
 
 # ——————————————————————GUI——————————————————————
@@ -135,7 +144,7 @@ ico_path = '{}\\img\\ico.ico'.format(os.getcwd())
 home.iconbitmap(ico_path)
 
 # 检测拖拽
-windnd.hook_dropfiles(home, func=dnd)
+hook_dropfiles(home, func=dnd)
 
 # 页头
 # 图
@@ -145,12 +154,12 @@ bg = ImageTk.PhotoImage(image=Image.open(bg_path))  # file：t图片路径
 # 按钮
 tk.Label(home, height=83, image=bg).pack(side='top', fill='x')  # 背景图
 
-save_zip_bt = tk.Button(home, text="选择解压\n保存\n的位置", font=('微软雅黑', 8),
-                        height=4, width=10, command=save_compress, state='disabled')
-save_zip_bt.place(x=182, y=6)
+save_compress_bt = tk.Button(home, text="选择解压\n保存\n的位置", font=('微软雅黑', 8),
+                             height=4, width=10, command=save_compress, state='disabled')
+save_compress_bt.place(x=182, y=6)
 
 tk.Button(home, text="打开\n压缩包", font=('微软雅黑', 8), height=4,
-          width=10, command=lambda: decided(save_zip_bt,"None")).place(x=2, y=6)
+          width=10, command=lambda: decided(save_compress_bt,"None")).place(x=2, y=6)
 tk.Button(home, text="压缩\n文件夹", font=('微软雅黑', 8),
           height=4, width=10, command=become_compress).place(x=92, y=6)
 

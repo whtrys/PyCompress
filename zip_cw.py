@@ -13,6 +13,10 @@ import os
 
 
 def recode(dir_names):
+    """
+    将乱码进行还原
+    :param dir_names:解压保存的目录
+    """
     os.chdir(dir_names)
 
     for temp_name in os.listdir('.'):
@@ -42,6 +46,7 @@ def get_zip(filename, file_list):
     :param file_list: list窗口
     :return: zip库的zipfile
     """
+    print("zip")
     zip_files = zipfile.ZipFile(filename, 'r')
     for i in zip_files.namelist():
         file_list.insert(0, i.encode('cp437').decode("gbk"))
@@ -76,16 +81,18 @@ def save_zip(save_zip_bt, zip_files, just_file_name):
             for file in zip_files.namelist():
                 zip_files.extract(file, save_dir)
             recode(save_dir)
+            tkms.showinfo("提示", "解压成功")
 
 
-def become_compress():
+def become_compress(become_compress_dir):
     """
     将文件夹压缩
     :return: 无
     """
-    become_compress_dir = tkfd.askdirectory(title='选择要压缩的文件夹')
+    if become_compress_dir is None:
+        become_compress_dir = tkfd.askdirectory(title='选择要压缩的文件夹')
     if become_compress_dir == '':
-        pass
+        tkms.showerror("错误","请选择保存的路径")
     else:
         def walk(path):
             lst = []
@@ -98,15 +105,23 @@ def become_compress():
 
         lst2 = []
         for i in walk(become_compress_dir):
-            o = i.split('\\')
-            lst2.append('/'.join(o))
+            lst2.append(i.replace('\\','/'))
 
         save_dir = tkfd.askdirectory(title='选择保存的目录')
-        num = randint(0, 100000)
-        zip_name = become_compress_dir.split('/')[-1] + '-{}.zip'.format(num)
-
-        z = zipfile.ZipFile(save_dir + '/' + zip_name, 'w', zipfile.ZIP_DEFLATED)
-        for i in lst2:
-            z.write(filename=i)
-        z.close()
-        tkms.showinfo("提示", "压缩完成")
+        if save_dir == '':
+            tkms.showerror("错误","请选择保存的路径")
+        else:
+            try:
+                zip_name = become_compress_dir.split('/')[-1] + '.zip'
+                if os.path.exists(zip_name):
+                    choice = tkms.askyesno("提示","已存在此文件，是否覆盖\n选否将停止保存")
+                    if choice:
+                        z = zipfile.ZipFile(save_dir + '/' + zip_name, 'w', zipfile.ZIP_DEFLATED)
+                        for i in lst2:
+                            z.write(filename=i)
+                        z.close()
+                        tkms.showinfo("提示", "压缩完成")
+                    else:
+                        tkms.showinfo("提示", "已取消")
+            except:
+                tkms.showerror("zip模块错误","错位原因未知")

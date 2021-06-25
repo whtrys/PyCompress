@@ -4,6 +4,7 @@ Project:PyCompress
 File:zip_cw.py
 Author:whtry陈
 Time:2021-03-27 09:47
+解压zip
 """
 from random import randint
 import tkinter.filedialog as tkfd

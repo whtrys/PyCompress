@@ -4,6 +4,8 @@ Project:PyCompress
 File:rar_cw.py
 Author:whtry陈
 Time:2021-03-27 09:47
+解压rar，
+注意：因为rar压缩算法不公开，所以使用了原生包，根目录下的UnRar.exe请勿删除
 """
 import rarfile
 import tkinter.messagebox as tkms

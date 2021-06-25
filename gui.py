@@ -21,6 +21,7 @@ with open('setting.json', 'r', encoding='utf-8') as f:
 
 b_compress_item = setting["auto_save_item"]
 support_file = [('zip文件', '*.zip'), ('rar文件', '*.rar')]  # ,('tar文件','*.tar'),('rar文件','*.rar')]
+support_file_pure = ['zip', 'rar']
 compress_item = ''
 compress_files = ''
 file_path_name = ''
@@ -67,7 +68,7 @@ def restart_program():
     os.execl(python, python, *sys.argv)
 
 
-def decided(bt):
+def decided(bt, file_name):
     """
     打开并判断打开的文件类型
     :param bt: 保存按键
@@ -82,7 +83,8 @@ def decided(bt):
         restart_program()
 
     file_list.delete(0, tk.END)
-    file_name = tkfd.askopenfilename(filetypes=support_file)
+    if file_name == "None":
+        file_name = tkfd.askopenfilename(filetypes=support_file)
 
     file_name_sp = file_name.split('/')
     file_name_sp = file_name_sp[-1]
@@ -111,6 +113,19 @@ def become_compress():
         pass
 
 
+def dnd(file):
+    files = b'114514\n'.join(file).decode("gbk")
+    file_list = files.split("114514\n")
+    if len(file_list) > 1:
+        tkms.showerror(language["error"], "请一次性拖拽一个文件")
+    else:
+        for i in file_list:
+            if i.split(".")[-1] not in support_file_pure:
+                tkms.showerror(language["error"], language["Error!We don't support these formats!"])
+            else:
+                decided(save_zip_bt,i)
+
+
 # ——————————————————————GUI——————————————————————
 home = tk.Tk()
 home.geometry('800x600')
@@ -118,6 +133,9 @@ home.resizable(0, 0)
 home.title(language["home_title"])
 ico_path = '{}\\img\\ico.ico'.format(os.getcwd())
 home.iconbitmap(ico_path)
+
+# 检测拖拽
+windnd.hook_dropfiles(home, func=dnd)
 
 # 页头
 # 图
@@ -132,11 +150,11 @@ save_zip_bt = tk.Button(home, text="选择解压\n保存\n的位置", font=('微
 save_zip_bt.place(x=182, y=6)
 
 tk.Button(home, text="打开\n压缩包", font=('微软雅黑', 8), height=4,
-          width=10, command=lambda: decided(save_zip_bt)).place(x=2, y=6)
+          width=10, command=lambda: decided(save_zip_bt,"None")).place(x=2, y=6)
 tk.Button(home, text="压缩\n文件夹", font=('微软雅黑', 8),
           height=4, width=10, command=become_compress).place(x=92, y=6)
 
-tk.Button(home, text="关于\n我们", font=('微软雅黑', 8),
+tk.Button(home, text=language["about_us"], font=('微软雅黑', 8),
           height=4, width=10, command=about_us).place(x=717, y=6)
 
 # 中间

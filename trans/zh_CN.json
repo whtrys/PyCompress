@@ -3,5 +3,7 @@
   "about_us": "关于我们",
   "tip": "提示",
   "under_tip": "tip:解压缩时可能会未响应，不要慌，只是正在解压罢了",
-  "file": "文件"
+  "file": "文件",
+  "error": "错误",
+  "Error!We don't support these formats!": "错误！我们不支持这些格式！"
 }

@@ -73,6 +73,7 @@ def decided(bt, filepath):
     """
     打开并判断打开的文件类型
     :param bt: 保存按键
+    :param filepath: 文件路径
     :return:
     """
     global compress_files
@@ -105,6 +106,7 @@ def decided(bt, filepath):
         bt['state'] = 'normal'
         compress_files = rar_cw.get_rar(filepath)
 
+
 def save_compress():
     if compress_item == 'zip':
         zip_cw.save_zip(save_compress_bt, compress_files, file_path_name)
@@ -127,11 +129,11 @@ def dnd(file):
     else:
         for i in file_list:
             if not os.path.isfile(i):
-                become_compress(i.replace('\\','/'))
+                become_compress(i.replace('\\', '/'))
             elif i.split(".")[-1] not in support_file_pure:
                 tkms.showerror(language["error"], language["Error!We don't support these formats!"])
             else:
-                decided(save_compress_bt,i)
+                decided(save_compress_bt, i)
 
 
 # ——————————————————————GUI——————————————————————
@@ -158,7 +160,7 @@ save_compress_bt = tk.Button(home, text="选择解压\n保存\n的位置", font=
 save_compress_bt.place(x=182, y=6)
 
 tk.Button(home, text="打开\n压缩包", font=('微软雅黑', 8), height=4,
-          width=10, command=lambda: decided(save_compress_bt,"None")).place(x=2, y=6)
+          width=10, command=lambda: decided(save_compress_bt, "None")).place(x=2, y=6)
 tk.Button(home, text="压缩\n文件夹", font=('微软雅黑', 8),
           height=4, width=10, command=become_compress).place(x=92, y=6)
 

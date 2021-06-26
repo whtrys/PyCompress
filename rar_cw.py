@@ -19,7 +19,6 @@ def get_rar(filepath):
     :param filepath: 打开的压缩包路径
     :return:
     """
-    print("rar")
     question = tkms.askyesno("提示", "rar不支持查看压缩文件内容，仅支持直接解压，是否继续")
     if question:
         rf = rarfile.RarFile(filepath)
@@ -29,7 +28,6 @@ def get_rar(filepath):
         else:
             file_name = filepath.split("\\")[-1].split(".")[0]
             save_dir = '{}/{}'.format(save_dir, file_name)
-            print(save_dir)
             # 判断是否存在同名文件夹
             if os.path.exists(save_dir):
                 tkms.showerror("错误", "存在与该压缩包重名的文件夹")

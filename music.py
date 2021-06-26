@@ -12,7 +12,6 @@ with open('setting.json', 'r', encoding='utf-8') as f:
     music = json.load(f)
 
 music_path = music["music"]
-print(music_path)
 
 
 def about_me_music():

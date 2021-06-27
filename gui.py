@@ -4,6 +4,7 @@ Project:PyCompress
 File:gui.py
 Author:whtry陈
 Time:2021-03-27 09:47
+程序的GUI文件，方便适配
 """
 import tkinter as tk
 from PIL import Image, ImageTk
@@ -53,6 +54,7 @@ def about_us():
                       "copyright  whtrys(whtry陈)\n",
              font=('微软雅黑', 13)).pack()
 
+    # 一旦关闭窗口，就关闭音乐
     def on_closing():
         music.stop_play_music(pm)
         au.destroy()
@@ -63,7 +65,7 @@ def about_us():
 def restart_program():
     """
     重启程序
-    :return:
+    :return: 无
     """
     python = sys.executable
     os.execl(python, python, *sys.argv)
@@ -97,6 +99,7 @@ def decided(bt, filepath):
     choice = choice[-1]
     compress_item = choice
 
+    # TODO : 还有一堆别的格式。。。啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊！
     if choice == '':
         pass
     elif choice == 'zip':
@@ -108,12 +111,18 @@ def decided(bt, filepath):
 
 
 def save_compress():
+    """
+    保存解压后的压缩文件
+    """
     if compress_item == 'zip':
         zip_cw.save_zip(save_compress_bt, compress_files, file_path_name)
     tkms.showinfo(language['tip'], "已解压")
 
 
 def become_compress(file=None):
+    """
+    压缩文件夹
+    """
     if b_compress_item == 'zip':
         zip_cw.become_compress(file)
     elif b_compress_item == 'rar':
@@ -122,6 +131,10 @@ def become_compress(file=None):
 
 
 def dnd(file):
+    """
+    文件拖拽支持
+    :param file: 拖进来的文件或文件夹
+    """
     files = b'114514\n'.join(file).decode("gbk")
     file_list = files.split("114514\n")
     if len(file_list) > 1:
@@ -129,7 +142,7 @@ def dnd(file):
     else:
         for i in file_list:
             if not os.path.isfile(i):
-                become_compress(i.replace('\\', '/'))
+                become_compress(i.replace('\\', '/'))  # 替换路径中的反斜杠（win这反人类的路径符号。。。）
             elif i.split(".")[-1] not in support_file_pure:
                 tkms.showerror(language["error"], language["Error!We don't support these formats!"])
             else:
@@ -151,7 +164,7 @@ hook_dropfiles(home, func=dnd)
 # 图
 # 创建一个图片管理类
 bg_path = '{}\\img\\bg.jpg'.format(os.getcwd())
-bg = ImageTk.PhotoImage(image=Image.open(bg_path))  # file：t图片路径
+bg = ImageTk.PhotoImage(image=Image.open(bg_path))
 # 按钮
 tk.Label(home, height=83, image=bg).pack(side='top', fill='x')  # 背景图
 

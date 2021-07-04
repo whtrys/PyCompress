@@ -82,7 +82,7 @@ def decided(bt, filepath):
     global file_path_name
     global compress_item
 
-    print("decided")
+    print("正在判断文件类型")
     # 重启程序以清空缓存的文件
     if compress_item != '':
         restart_program()

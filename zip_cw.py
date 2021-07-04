@@ -47,7 +47,7 @@ def get_zip(filename, file_list):
     :param file_list: list窗口
     :return: zip库的zipfile
     """
-    print("zip")
+    print("zip类型")
     zip_files = zipfile.ZipFile(filename, 'r')
     for i in zip_files.namelist():
         file_list.insert(0, i.encode('cp437').decode("gbk"))
@@ -92,7 +92,7 @@ def become_compress(become_compress_dir):
     if become_compress_dir is None:
         become_compress_dir = tkfd.askdirectory(title='选择要压缩的文件夹')
     if become_compress_dir == '':
-        tkms.showerror("错误","请选择保存的路径")
+        tkms.showerror("错误", "请选择保存的路径")
     else:
         def walk(path):
             lst = []
@@ -105,23 +105,19 @@ def become_compress(become_compress_dir):
 
         lst2 = []
         for i in walk(become_compress_dir):
-            lst2.append(i.replace('\\','/'))
+            lst2.append(i.replace('\\', '/'))
 
         save_dir = tkfd.askdirectory(title='选择保存的目录')
         if save_dir == '':
-            tkms.showerror("错误","请选择保存的路径")
+            tkms.showerror("错误", "请选择保存的路径")
         else:
             try:
                 zip_name = become_compress_dir.split('/')[-1] + '.zip'
-                if os.path.exists(zip_name):
-                    choice = tkms.askyesno("提示","已存在此文件，是否覆盖\n选否将停止保存")
-                    if choice:
-                        z = zipfile.ZipFile(save_dir + '/' + zip_name, 'w', zipfile.ZIP_DEFLATED)
-                        for i in lst2:
-                            z.write(filename=i)
-                        z.close()
-                        tkms.showinfo("提示", "压缩完成")
-                    else:
-                        tkms.showinfo("提示", "已取消")
+                print("不存在相同文件名的文件")
+                z = zipfile.ZipFile(save_dir + '/' + zip_name, 'w', zipfile.ZIP_DEFLATED)
+                for i in lst2:
+                    z.write(filename=i)
+                z.close()
+                tkms.showinfo("提示", "压缩完成")
             except:
-                tkms.showerror("zip模块错误","错位原因未知")
+                tkms.showerror("zip压缩模块错误", "错位原因未知")

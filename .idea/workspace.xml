@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4befee52-dec1-4935-8467-a547409efbbc" name="默认变更列表" comment="规范化代码">
+    <list default="true" id="4befee52-dec1-4935-8467-a547409efbbc" name="默认变更列表" comment="规范化代码，加注释。。。">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2021_6_25_17_24____.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2021_6_25_17_24_取消提交了变更_[默认变更列表]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zip_cw.py" beforeDir="false" afterPath="$PROJECT_DIR$/zip_cw.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624694670096</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="规范化代码，加注释。。。">
+      <created>1624790897229</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1624790897229</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,7 +205,8 @@
     <MESSAGE value="支持rar" />
     <MESSAGE value="修复了zip解压的bug，优化了逻辑" />
     <MESSAGE value="规范化代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="规范化代码" />
+    <MESSAGE value="规范化代码，加注释。。。" />
+    <option name="LAST_COMMIT_MESSAGE" value="规范化代码，加注释。。。" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

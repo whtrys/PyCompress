@@ -1,0 +1,14 @@
+{
+  "主页标题": "PyCompress v1.1.1",
+  "关于我们": "About Us",
+  "提示": "tips",
+  "底部提示": "Tip:There may be no response during decompression. Don't panic, it's just decompression.Please wait a moment.",
+  "文件：": "files:",
+  "错误": "Error",
+  "错误！我们不支持这些格式！": "Error!We don't support these formats",
+  "请一次性拖拽一个文件": "Please drag and drop one file at a time",
+  "打开\n压缩包": "Open\ncompressed\npackage",
+  "压缩\n文件夹": "Compressed\nfolder",
+  "选择解压\n保存\n的位置": "Select a\nlocation to\nunzip",
+  "关于我们_全": "PyCompress\nA very pure decompression software\nSupport：zip(C/U) rar(U)\n\nConnect：\nbilibili：whtry陈\nmail：whtrys@whtrys.space\nblog：https://blog.whtrys.space\n\ncopyright © whtrys(whtry陈)"
+}

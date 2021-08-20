@@ -1,9 +1,14 @@
 {
-  "home_title": "PyCompress v1.1.0",
-  "about_us": "关于我们",
-  "tip": "提示",
-  "under_tip": "tip:解压缩时可能会未响应，不要慌，只是正在解压罢了",
-  "file": "文件",
-  "error": "错误",
-  "Error!We don't support these formats!": "错误！我们不支持这些格式！"
+  "主页标题": "PyCompress v1.1.1",
+  "关于我们": "关于我们",
+  "提示": "提示",
+  "底部提示": "Tip:解压缩时可能会未响应，不要慌，只是正在解压罢了。请稍等。",
+  "文件：": "文件：",
+  "错误": "错误",
+  "错误！我们不支持这些格式！": "错误！我们不支持这些格式！",
+  "请一次性拖拽一个文件": "请一次性拖拽一个文件",
+  "打开\n压缩包": "打开\n压缩包",
+  "压缩\n文件夹": "压缩\n文件夹",
+  "选择解压\n保存\n的位置": "选择解压\n保存\n的位置",
+  "关于我们_全": "PyCompress\n一个简洁的解压&压缩软件\n目前支持：zip(解/压) rar(解)\n\n联系方式：\nbilibili：whtry陈\n邮件：whtrys@whtrys.space\n博客：https://blog.whtrys.space\n\ncopyright © whtrys(whtry陈)"
 }

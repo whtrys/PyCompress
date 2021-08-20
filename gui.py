@@ -43,16 +43,8 @@ def about_us():
     au = tk.Toplevel()
     au.geometry('480x270')
     au.resizable(0, 0)
-    au.title(language['about_us'])
-    tk.Label(au, text="PyCompress\n"
-                      "一个简洁的解压&压缩软件\n"
-                      "目前支持：zip\n\n"
-                      "联系方式：\n"
-                      "bilibili：whtry陈\n"
-                      "邮件：whtrys@whtrys.space\n"
-                      "博客：https://blog.whtrys.space\n(一定要用https！)\n\n"
-                      "copyright  whtrys(whtry陈)\n",
-             font=('微软雅黑', 13)).pack()
+    au.title(language['关于我们'])
+    tk.Label(au, text=language["关于我们_全"], font=('微软雅黑', 13)).pack()
 
     # 一旦关闭窗口，就关闭音乐
     def on_closing():
@@ -116,7 +108,7 @@ def save_compress():
     """
     if compress_item == 'zip':
         zip_cw.save_zip(save_compress_bt, compress_files, file_path_name)
-    tkms.showinfo(language['tip'], "已解压")
+    tkms.showinfo(language['提示'], "已解压")
 
 
 def become_compress(file=None):
@@ -138,13 +130,13 @@ def dnd(file):
     files = b'114514\n'.join(file).decode("gbk")
     file_list = files.split("114514\n")
     if len(file_list) > 1:
-        tkms.showerror(language["error"], "请一次性拖拽一个文件")
+        tkms.showerror(language["错误"], language["请一次性拖拽一个文件"])
     else:
         for i in file_list:
             if not os.path.isfile(i):
                 become_compress(i.replace('\\', '/'))  # 替换路径中的反斜杠（win这反人类的路径符号。。。）
             elif i.split(".")[-1] not in support_file_pure:
-                tkms.showerror(language["error"], language["Error!We don't support these formats!"])
+                tkms.showerror(language["错误"], language["错误！我们不支持这些格式！"])
             else:
                 decided(save_compress_bt, i)
 
@@ -153,7 +145,7 @@ def dnd(file):
 home = tk.Tk()
 home.geometry('800x600')
 home.resizable(0, 0)
-home.title(language["home_title"])
+home.title(language["主页标题"])
 ico_path = '{}\\img\\ico.ico'.format(os.getcwd())
 home.iconbitmap(ico_path)
 
@@ -168,25 +160,25 @@ bg = ImageTk.PhotoImage(image=Image.open(bg_path))
 # 按钮
 tk.Label(home, height=83, image=bg).pack(side='top', fill='x')  # 背景图
 
-save_compress_bt = tk.Button(home, text="选择解压\n保存\n的位置", font=('微软雅黑', 8),
+save_compress_bt = tk.Button(home, text=language["选择解压\n保存\n的位置"], font=('微软雅黑', 8),
                              height=4, width=10, command=save_compress, state='disabled')
 save_compress_bt.place(x=182, y=6)
 
-tk.Button(home, text="打开\n压缩包", font=('微软雅黑', 8), height=4,
+tk.Button(home, text=language["打开\n压缩包"], font=('微软雅黑', 8), height=4,
           width=10, command=lambda: decided(save_compress_bt, "None")).place(x=2, y=6)
-tk.Button(home, text="压缩\n文件夹", font=('微软雅黑', 8),
+tk.Button(home, text=language["压缩\n文件夹"], font=('微软雅黑', 8),
           height=4, width=10, command=become_compress).place(x=92, y=6)
 
-tk.Button(home, text=language["about_us"], font=('微软雅黑', 8),
+tk.Button(home, text=language["关于我们"], font=('微软雅黑', 8),
           height=4, width=10, command=about_us).place(x=717, y=6)
 
 # 中间
-tk.Label(home, text=language['file']).pack(anchor='w', pady=2)
+tk.Label(home, text=language['文件：']).pack(anchor='w', pady=2)
 file_list = tk.Listbox(home, font=("微软雅黑", 11))
 file_list.pack(fill='both', expand='yes', anchor='center')
 
 # 页脚 tip-小贴士
-tk.Label(home, text=language["under_tip"], font=('微软雅黑', 10),
+tk.Label(home, text=language["底部提示"], font=('微软雅黑', 10),
          bg='white').pack(side='bottom', fill='x')
 
 tk.mainloop()

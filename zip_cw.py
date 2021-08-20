@@ -71,6 +71,7 @@ def save_zip(save_zip_bt, zip_files, just_file_name):
         if save_dir == '':
             pass
         else:
+            just_file_name = just_file_name.split("/")[-1]
             save_dir = '{}\\{}'.format(save_dir, just_file_name)
             # 判断是否存在同名文件夹
             if os.path.exists(save_dir):

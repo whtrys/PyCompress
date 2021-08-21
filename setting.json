@@ -3,7 +3,7 @@
   "auto_save_item": "zip",
   "--": "--",
   "这个是语言": "This is language",
-  "language": "i10n/en.json",
+  "language": "i18n/en.json",
   "--": "--",
   "这个是“关于我们”的背景音乐，默认是Yes（开）,No（关）": "This is the background music of 'about us',The default is 'Yes'(open),'No'(close)",
   "music_run": "Yes",

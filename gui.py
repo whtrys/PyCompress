@@ -38,7 +38,8 @@ def about_us():
     :return: 无
     """
     # 背景音乐
-    pm = music.about_me_music()
+    if setting["music_run"] == "Yes":
+        pm = music.about_me_music()
     # 主界面
     au = tk.Toplevel()
     au.geometry('480x270')
@@ -51,7 +52,8 @@ def about_us():
         music.stop_play_music(pm)
         au.destroy()
 
-    au.protocol("WM_DELETE_WINDOW", on_closing)
+    if setting["music_run"] == "Yes":
+        au.protocol("WM_DELETE_WINDOW", on_closing)
 
 
 def restart_program():

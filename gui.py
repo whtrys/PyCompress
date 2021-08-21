@@ -3,7 +3,7 @@
 Project:PyCompress
 File:gui.py
 Author:whtry陈
-Time:2021-03-27 09:47
+Time:2021-03-27 09:48
 程序的GUI文件，方便适配
 """
 import tkinter as tk

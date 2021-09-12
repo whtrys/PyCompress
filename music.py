@@ -4,6 +4,7 @@ Project:PyCompress
 File:music.py
 Author:whtry陈
 Time:2021-03-27 09:47
+播放背景音乐
 """
 import winsound
 import json

@@ -17,9 +17,11 @@ import sys
 import json
 from windnd import hook_dropfiles
 import rar_cw
+import set
 
 with open('setting.json', 'r', encoding='utf-8') as f:
     setting = json.load(f)
+    f.close()
 
 b_compress_item = setting["auto_save_item"]
 support_file = [('zip文件', '*.zip'), ('rar文件', '*.rar')]  # ,('tar文件','*.tar'),('rar文件','*.rar')]
@@ -30,6 +32,7 @@ file_path_name = ''
 
 with open(setting["language"], 'r', encoding='utf-8') as f:
     language = json.load(f)
+    f.close()
 
 
 def about_us():
@@ -93,7 +96,7 @@ def decided(bt, filepath):
     choice = choice[-1]
     compress_item = choice
 
-    # TODO : 还有一堆别的格式。。。啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊！
+    # TODO : 还有一堆别的格式要接入。。。啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊！
     if choice == '':
         pass
     elif choice == 'zip':
@@ -170,6 +173,9 @@ tk.Button(home, text=language["打开\n压缩包"], font=('微软雅黑', 8), he
           width=10, command=lambda: decided(save_compress_bt, "None")).place(x=2, y=6)
 tk.Button(home, text=language["压缩\n文件夹"], font=('微软雅黑', 8),
           height=4, width=10, command=become_compress).place(x=92, y=6)
+
+tk.Button(home, text=language["设置"], font=('微软雅黑', 8),
+          height=4, width=10, command=lambda: set.setting(bg)).place(x=182, y=6)
 
 tk.Button(home, text=language["关于我们"], font=('微软雅黑', 8),
           height=4, width=10, command=about_us).place(x=717, y=6)

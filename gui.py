@@ -168,7 +168,7 @@ tk.Label(home, height=83, image=bg).pack(side='top', fill='x')  # 背景图
 
 save_compress_bt = tk.Button(home, text=language["选择解压\n保存\n的位置"], font=('微软雅黑', 8),
                              height=4, width=10, command=save_compress, state='disabled')
-save_compress_bt.place(x=182, y=6)
+save_compress_bt.place(x=272, y=6)
 
 tk.Button(home, text=language["打开\n压缩包"], font=('微软雅黑', 8), height=4,
           width=10, command=lambda: decided(save_compress_bt, "None")).place(x=2, y=6)

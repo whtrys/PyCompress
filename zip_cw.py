@@ -6,11 +6,10 @@ Author:whtry陈
 Time:2021-03-27 09:47
 解压zip
 """
-from random import randint
+import os
 import tkinter.filedialog as tkfd
 import tkinter.messagebox as tkms
 import zipfile
-import os
 
 
 def recode(dir_names):
@@ -113,8 +112,9 @@ def become_compress(become_compress_dir):
             tkms.showerror("错误", "请选择保存的路径")
         else:
             try:
+                print(save_dir)
                 zip_name = become_compress_dir.split('/')[-1] + '.zip'
-                print("不存在相同文件名的文件")
+                print("不存在相同文件名的文件" + zip_name)
                 z = zipfile.ZipFile(save_dir + '/' + zip_name, 'w', zipfile.ZIP_DEFLATED)
                 for i in lst2:
                     z.write(filename=i)

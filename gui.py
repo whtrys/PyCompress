@@ -6,25 +6,26 @@ Author:whtry陈
 Time:2021-03-27 09:48
 程序的GUI文件，方便适配
 """
+import json
+import os
+import sys
 import tkinter as tk
-from PIL import Image, ImageTk
 import tkinter.filedialog as tkfd
 import tkinter.messagebox as tkms
-import os
-import music
-import zip_cw
-import sys
-import json
+
+from PIL import Image, ImageTk
 from windnd import hook_dropfiles
-import rar_cw
+
+# import music
 import set
+import zip_cw
 
 with open('setting.json', 'r', encoding='utf-8') as f:
     setting = json.load(f)
     f.close()
 
 b_compress_item = setting["auto_save_item"]
-support_file = [('zip文件', '*.zip'), ('rar文件', '*.rar')]  # ,('tar文件','*.tar'),('rar文件','*.rar')]
+support_file = [('zip文件', '*.zip')]  # ,('tar文件','*.tar'),('rar文件','*.rar')]
 support_file_pure = ['zip', 'rar']
 compress_item = ''
 compress_files = ''
@@ -41,8 +42,8 @@ def about_us():
     :return: 无
     """
     # 背景音乐
-    if setting["music_run"] == "Yes":
-        pm = music.about_me_music()
+    # if setting["music_run"] == "Yes":
+    #     pm = music.about_me_music()
     # 主界面
     au = tk.Toplevel()
     au.geometry('480x270')
@@ -50,13 +51,12 @@ def about_us():
     au.title(language['关于我们'])
     tk.Label(au, text=language["关于我们_全"], font=('微软雅黑', 13)).pack()
 
-    # 一旦关闭窗口，就关闭音乐
-    def on_closing():
-        music.stop_play_music(pm)
-        au.destroy()
-
-    if setting["music_run"] == "Yes":
-        au.protocol("WM_DELETE_WINDOW", on_closing)
+    # # 一旦关闭窗口，就关闭音乐
+    # def on_closing():
+    #     music.stop_play_music(pm)
+    #     au.destroy()
+    # if setting["music_run"] == "Yes":
+    #     au.protocol("WM_DELETE_WINDOW", on_closing)
 
 
 def restart_program():
@@ -102,9 +102,9 @@ def decided(bt, filepath):
     elif choice == 'zip':
         bt['state'] = 'normal'
         compress_files = zip_cw.get_zip(filepath, file_list)
-    elif choice == 'rar':
-        bt['state'] = 'normal'
-        compress_files = rar_cw.get_rar(filepath)
+    # elif choice == 'rar':
+    #     bt['state'] = 'normal'
+    #     compress_files = rar_cw.get_rar(filepath)
 
 
 def save_compress():
@@ -120,30 +120,31 @@ def become_compress(file=None):
     """
     压缩文件夹
     """
+
     if b_compress_item == 'zip':
         zip_cw.become_compress(file)
-    elif b_compress_item == 'rar':
-        # rar_cw.become_compress(file)
-        pass
+    # elif b_compress_item == 'rar':
+    #     # rar_cw.become_compress(file)
+    #     pass
 
 
-def dnd(file):
-    """
-    文件拖拽支持
-    :param file: 拖进来的文件或文件夹
-    """
-    files = b'114514\n'.join(file).decode("gbk")
-    file_list = files.split("114514\n")
-    if len(file_list) > 1:
-        tkms.showerror(language["错误"], language["请一次性拖拽一个文件"])
-    else:
-        for i in file_list:
-            if not os.path.isfile(i):
-                become_compress(i.replace('\\', '/'))  # 替换路径中的反斜杠（win这反人类的路径符号。。。）
-            elif i.split(".")[-1] not in support_file_pure:
-                tkms.showerror(language["错误"], language["错误！我们不支持这些格式！"])
-            else:
-                decided(save_compress_bt, i)
+# def dnd(file):
+#     """
+#     文件拖拽支持
+#     :param file: 拖进来的文件或文件夹
+#     """
+#     files = b'114514\n'.join(file).decode("gbk")
+#     file_list = files.split("114514\n")
+#     if len(file_list) > 1:
+#         tkms.showerror(language["错误"], language["请一次性拖拽一个文件"])
+#     else:
+#         for i in file_list:
+#             if not os.path.isfile(i):
+#                 become_compress(i.replace('\\', '/'))  # 替换路径中的反斜杠（win这反人类的路径符号。。。）
+#             elif i.split(".")[-1] not in support_file_pure:
+#                 tkms.showerror(language["错误"], language["错误！我们不支持这些格式！"])
+#             else:
+#                 decided(save_compress_bt, i)
 
 
 # ——————————————————————GUI——————————————————————
@@ -151,16 +152,16 @@ home = tk.Tk()
 home.geometry('800x600')
 home.resizable(0, 0)
 home.title(language["主页标题"])
-ico_path = '{}\\img\\ico.ico'.format(os.getcwd())
-home.iconbitmap(ico_path)
+# ico_path = './img/ico.ico'
+# home.iconbitmap(ico_path)
 
 # 检测拖拽
-hook_dropfiles(home, func=dnd)
+# hook_dropfiles(home, func=dnd)
 
 # 页头
 # 图
 # 创建一个图片管理类
-bg_path = '{}\\img\\bg.jpg'.format(os.getcwd())
+bg_path = './img/bg.jpg'
 bg = ImageTk.PhotoImage(image=Image.open(bg_path))
 # 按钮
 tk.Label(home, height=83, image=bg).pack(side='top', fill='x')  # 背景图

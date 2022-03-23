@@ -6,11 +6,10 @@ Author:whtry陈
 Time:2021-08-21 11:15
 程序的设置界面，本质是对setting.json的修改
 """
-import os
-import sys
-from tkinter import *
 import json
+import os
 import tkinter.filedialog as tkfd
+from tkinter import *
 
 with open('setting.json', 'r', encoding='utf-8') as f:
     setting = json.load(f)
@@ -31,7 +30,7 @@ def restart_program():
 
 
 def write_json(name, body):
-    print(type(setting),name,body)
+    print(type(setting), name, body)
     setting[name] = body
     with open('{}\\setting.json'.format(os.getcwd()), 'w') as write_f:
         json.dump(setting, write_f, indent=4, ensure_ascii=False)

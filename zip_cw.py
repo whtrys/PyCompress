@@ -21,22 +21,20 @@ def recode(dir_names):
 
     for temp_name in os.listdir('.'):
         try:
-            # 使用cp437对文件名进行解码还原
             new_name = temp_name.encode('cp437')
-            # win下一般使用的是gbk编码
             new_name = new_name.decode("gbk")
-            # 对乱码的文件名及文件夹名进行重命名
             os.rename(temp_name, new_name)
             # 传回重新编码的文件名给原文件名
             temp_name = new_name
+
+            if os.path.isdir(temp_name):
+                # 对子文件夹进行递归调用
+                recode(temp_name)
+                # 记得返回上级目录
+                os.chdir('..')
+
         except:
             pass
-
-    if os.path.isdir(temp_name):
-        # 对子文件夹进行递归调用
-        recode(temp_name)
-        # 记得返回上级目录
-        os.chdir('..')
 
 
 def get_zip(filename, file_list):

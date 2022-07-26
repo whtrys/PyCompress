@@ -2,6 +2,7 @@ import os
 import tarfile
 import tkinter.filedialog as tkfd
 import tkinter.messagebox as tkms
+import public
 
 
 def become_compress(become_compress_dir):
@@ -15,17 +16,8 @@ def become_compress(become_compress_dir):
     if become_compress_dir == '':
         tkms.showerror("错误", "请选择保存的路径")
     else:
-        def walk(path):
-            lst = []
-            if not os.path.exists(path):
-                return -1
-            for root, dirs, names in os.walk(path):
-                for filename in names:
-                    lst.append(os.path.join(root, filename))
-            return lst
-
         lst2 = []
-        for i in walk(become_compress_dir):
+        for i in public.walk(become_compress_dir):
             lst2.append(i.replace('\\', '/'))
 
         save_dir = tkfd.askdirectory(title='选择保存的目录')

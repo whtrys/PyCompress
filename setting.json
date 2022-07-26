@@ -1,13 +1,10 @@
 {
   "这个是自动保存的压缩文件类型": "This is an automatically saved compressed file type",
   "auto_save_item": "zip",
-  "--": "--",
   "这个是语言": "This is language",
-  "language": "i18n/en.json",
-  "--": "--",
+  "language": "i18n/zh_CN.json",
   "这个是“关于我们”的背景音乐，默认是Yes（开）,No（关）": "This is the background music of 'about us',The default is 'Yes'(open),'No'(close)",
   "music_run": "Yes",
-  "--": "--",
   "这个是“关于我们”的背景音乐（只测试了wav可以播放）": "This is background music of 'about us'(only tested that wav can play)",
   "music": "./music/niconiconi.wav"
 }

@@ -72,31 +72,46 @@ class Compress:
 print("zip解压乱码替代解压工具 命令行版本 v0.0.1")
 print("author:whtrys github:https://github.com/whtrys/PyCompress")
 
-user = Compress()
 
-user.zipFilePath = input("-->请输入zip文件路径（请不要添加双引号）：")
-
-
-def checkPath():
+def checkPath(path, types):
     """
     判断释放路径是否存在
     """
+    if types == 0:
+        if not os.path.isfile(path):
+            userIn = input("Error:该文件不存在，请重新输入：")
+            user.zipFilePath = userIn
+            checkPath(userIn, 0)
+
+    elif types == 1:
+        if not os.path.exists(path):
+            userIn = input("Error:该路径不存在，请重新输入：")
+            user.savePath = userIn
+            checkPath(userIn, 1)
+
+
+while True:
+    user = Compress()
+
+    user.zipFilePath = input("-->请输入zip文件路径（请不要添加双引号）：")
+    checkPath(user.zipFilePath, 0)
     user.savePath = input("-->请输入zip文件释放路径（请不要添加双引号）：")
-    if not os.path.exists(user.savePath):
-        checkPath()
+    checkPath(user.savePath, 1)
 
+    try:
+        user.get_zip()
 
-checkPath()
+    except Exception as err:
+        print("Error:源zip文件损坏！无法解压缩。")
 
-user.get_zip()
+    else:
+        print("-->包含以下文件/文件夹\n")
+        for i in user.ConcludeFileNameList:
+            print(i)
 
-print("-->包含以下文件/文件夹\n")
-for i in user.ConcludeFileNameList:
-    print(i)
-
-choose = input("\n-->请问是否解压？(Y/N)")
-if choose == "Y":
-    user.save_zip()
-    print("-->解压完成！")
-else:
-    print("-->已取消")
+        choose = input("\n-->请问是否解压？(Y/N)")
+        if choose == "Y":
+            user.save_zip()
+            print("-->解压完成！")
+        else:
+            print("-->已取消")
